@@ -1,13 +1,13 @@
 #pragma once
 #include "Core.h"
 
-class Input : public Ref
+class Input
 {
 	SINGLETON_CLASS(Input)
 	friend LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);
 public:
 	bool Init();
-	void Cleanup() override;
+	void Cleanup();
 
 	bool IsKeyDown(unsigned int key);
 

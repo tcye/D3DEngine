@@ -6,81 +6,6 @@
 
 const DWORD Vertex::FVF = D3DFVF_XYZ;
 
-static VertexBuffer* vb;
-static IndexBuffer* ib;
-
-void Renderer::render()
-{
-	D3DXMATRIX Rx, Ry;
-	D3DXMatrixRotationX(&Rx, 3.14f / 4.0f);
-
-	static float y = 0.0f;
-	D3DXMatrixRotationY(&Ry, y);
-	y += 0.001f;
-
-	if (y >= 6.28f)
-		y = 0.0f;
-
-	D3DMATRIX p = Rx * Ry;
-	m_device->SetTransform(D3DTS_WORLD, &p);
-	
-	DrawIndexedPrimitive(vb, ib);
-}
-
-void test()
-{
-	auto device = Renderer::GetInstance()->GetDeviceHandle();
-
-	vb = VertexBuffer::Create(8);
-	vb->retain();
-	ib = IndexBuffer::Create(36);
-	ib->retain();
-
-	Vertex* vertices = vb->Lock();
-	vertices[0] = { -1.0f, -1.0f, -1.0f };
-	vertices[1] = { -1.0f, 1.0f, -1.0f };
-	vertices[2] = { 1.0f, 1.0f, -1.0f };
-	vertices[3] = { 1.0f, -1.0f, -1.0f };
-	vertices[4] = { -1.0f, -1.0f, 1.0f };
-	vertices[5] = { -1.0f, 1.0f, 1.0f };
-	vertices[6] = { 1.0f, 1.0f, 1.0f };
-	vertices[7] = { 1.0f, -1.0f, 1.0f };
-	vb->Unlock();
-
-	WORD* indices = ib->Lock();
-	indices[0] = 0; indices[1] = 1; indices[2] = 2;
-	indices[3] = 0; indices[4] = 2; indices[5] = 3;
-
-	indices[6] = 4; indices[7] = 6; indices[8] = 5;
-	indices[9] = 4; indices[10] = 7; indices[11] = 6;
-
-	indices[12] = 4; indices[13] = 5; indices[14] = 1;
-	indices[15] = 4; indices[16] = 1; indices[17] = 0;
-
-	indices[18] = 3; indices[19] = 2; indices[20] = 6;
-	indices[21] = 3; indices[22] = 6; indices[23] = 7;
-
-	indices[24] = 1; indices[25] = 5; indices[26] = 6;
-	indices[27] = 1; indices[28] = 6; indices[29] = 2;
-
-	indices[30] = 4; indices[31] = 0; indices[32] = 3;
-	indices[33] = 4; indices[34] = 3; indices[35] = 7;
-	ib->Unlock();
-
-	D3DXVECTOR3 position(0.0f, 0.0f, -5.0f);
-	D3DXVECTOR3 target(0.0f, 0.0f, 0.0f);
-	D3DXVECTOR3 up(0.0f, 1.0f, 0.0f);
-	D3DXMATRIX V;
-	D3DXMatrixLookAtLH(&V, &position, &target, &up);
-	device->SetTransform(D3DTS_VIEW, &V);
-
-	D3DXMATRIX proj;
-	D3DXMatrixPerspectiveFovLH(&proj, D3DX_PI*0.5f, 800.0f / 600.0f, 1.0f, 1000.0f);
-	device->SetTransform(D3DTS_PROJECTION, &proj);
-
-	device->SetRenderState(D3DRS_FILLMODE, D3DFILL_WIREFRAME);
-}
-
 bool Renderer::Init(bool fullscreen, int w, int h)
 {
 	m_d3d9 = Direct3DCreate9(D3D_SDK_VERSION);
@@ -113,8 +38,6 @@ bool Renderer::Init(bool fullscreen, int w, int h)
 
 	if (FAILED(hr))
 		return false;
-
-	test();
 
 	return true;
 }

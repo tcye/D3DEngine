@@ -2,6 +2,7 @@
 #include "Platform.h"
 #include "Input.h"
 #include "Renderer.h"
+#include "System.h"
 
 static char szTitle[] = "GameEngine";
 static char szWindowClass[] = "GameEngineWndClass";
@@ -102,14 +103,8 @@ void Platform::RunMessageLoop()
 		}
 		else
 		{
-			Renderer* renderer = Renderer::GetInstance();
-			renderer->Clear();
-			renderer->BeginScene();
-			
-			renderer->render();
-
-			renderer->EndScene();
-			renderer->Present();
+			System::GetInstance()->Update();
+			System::GetInstance()->Render();
 		}
 		AutoReleasePool::GetInstance()->Cleanup();
 	}

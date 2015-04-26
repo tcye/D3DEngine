@@ -17,7 +17,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 		return 1;
 	}
 	system->Run();
-	system->Release();
+	system->Cleanup();
 
 	return 0;
 }

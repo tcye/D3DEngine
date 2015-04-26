@@ -26,7 +26,7 @@ public:
 
 	virtual void Cleanup();
 
-	void retain();
+	void Retain();
 	void Release();
 	void AutoRelease();
 
@@ -43,4 +43,23 @@ public:
 
 private:
 	std::vector<Ref*> m_objects;
+};
+
+class Node : public Ref
+{
+public:
+	Node() : m_parent(NULL) { }
+
+	virtual void Update();
+	virtual void Render();
+
+	void Cleanup() override;
+
+	void AddChild(Node*);
+	void RemoveChild(Node*);
+
+protected:
+	Node* m_parent;
+	std::vector<Node*> m_children;
+
 };

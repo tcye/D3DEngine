@@ -4,12 +4,12 @@
 class VertexBuffer;
 class IndexBuffer;
 
-class Renderer : public Ref
+class Renderer
 {
 	SINGLETON_CLASS(Renderer)
 public:
 	bool Init(bool, int, int);
-	void Cleanup() override;
+	void Cleanup();
 
 	void BeginScene();
 	void EndScene();

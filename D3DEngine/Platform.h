@@ -1,12 +1,12 @@
 #pragma once
 #include "Core.h"
 
-class Platform : public Ref
+class Platform
 {
 	SINGLETON_CLASS(Platform)
 public:
 	bool Init(bool fullscreen, int w, int h);
-	void Cleanup() override;
+	void Cleanup();
 
 	void RunMessageLoop();
 
