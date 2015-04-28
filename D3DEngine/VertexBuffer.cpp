@@ -30,7 +30,7 @@ bool VertexBuffer::Init(UINT count, DWORD usage)
 	return true;
 }
 
-void VertexBuffer::Cleanup()
+VertexBuffer::~VertexBuffer()
 {
 	m_vertexBuffer->Release();
 	m_vertexBuffer = NULL;

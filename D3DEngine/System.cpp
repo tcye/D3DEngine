@@ -4,6 +4,7 @@
 #include "Platform.h"
 #include "Input.h"
 #include "Director.h"
+#include "TestScene.h"
 
 bool System::Init()
 {
@@ -38,6 +39,9 @@ bool System::Init(bool fullscreen, int w, int h)
 
 	if (!m_director->Init())
 		return false;
+
+	Scene* s = TestScene::Create();
+	m_director->RunWithScene(s);
 
 	return true;
 }

@@ -10,13 +10,10 @@ struct Vertex
 class VertexBuffer : public Ref
 {
 public:
-	static VertexBuffer* Create(
-		UINT , 
-		DWORD usage = 0);
-
+	static VertexBuffer* Create(UINT, DWORD usage = 0);
 
 	bool Init(UINT, DWORD);
-	void Cleanup() override;
+	~VertexBuffer();
 
 	Vertex* Lock(UINT offset = 0, UINT size = 0, DWORD flags = 0);
 	void Unlock();

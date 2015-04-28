@@ -29,9 +29,6 @@ public:
 		return m_device;
 	}
 
-	// For Test Only!
-	void render();
-
 private:
 	IDirect3D9* m_d3d9;
 	IDirect3DDevice9* m_device;

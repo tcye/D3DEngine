@@ -6,7 +6,6 @@ Scene* Scene::Create()
 	Scene* s = new Scene();
 	if (!s->Init())
 		return NULL;
-
 	return s;
 }
 

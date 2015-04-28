@@ -33,7 +33,7 @@ bool IndexBuffer::Init(UINT count, DWORD usage)
 	return true;
 }
 
-void IndexBuffer::Cleanup()
+IndexBuffer::~IndexBuffer()
 {
 	m_indexBuffer->Release();
 	m_indexBuffer = NULL;
