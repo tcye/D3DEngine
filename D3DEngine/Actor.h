@@ -1,4 +1,5 @@
 #pragma once
+#include <map>
 #include "Core.h"
 #include "Component.h"
 
@@ -12,7 +13,10 @@ public:
 	void Update() override;
 	void Render() override;
 
+	void SetComponent(std::string, Component*);
+	Component* GetComponent(std::string);
+
 public:
-	Transform* transform;
+	std::map<std::string, Component*> m_components;
 };
 
